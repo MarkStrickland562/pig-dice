@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="css/styles.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <title>Pig Dice</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="jumbotron">
+        <h1>Pig Dice</h1>
+      </div>
+      <div id="startOfGame">
+        <form id="playGame">
+          <div class="form-group">
+            <label for="player1">Player 1 Name:</label>
+            <input id="player1" type="text" required value="Mark">
+            <label for="player1Guess">Guess the roll of the die:</label>
+            <input id="player1Guess" type="number" min="1" max="6" required value=1>
+          </div>
+          <div class="form-group">
+            <label for="player2">Player 2 Name:</label>
+            <input id="player2" type="text" required value="Kenny">
+            <label for="player2Guess">Guess the roll of the die:</label>
+            <input id="player2Guess" type="number" min="1" max="6" required value=5>
+          </div>
+          <button type="submit" class="btn btn-info">Roll!</button>
+        </form>
+      </div>
+
+      <div id="gamePlay">
+        <div class="row">
+          <div class="col-md-5 player1Col">
+            <h2><span id="player1Name"></span></h2>
+            <h3>Current Score:</h3>
+            <p><span id="player1Score"></span></p>
+            <div id="button1">
+              <button type="button" id="player1Roll" class="btn btn-info">Roll!</button>
+              <button type="button" id="player1Hold" class="btn btn-primary">Hold and Switch</button>
+            </div>
+          </div>
+          <div class="col-md-2 dieRoll">
+            <h4>Current Points</h4>
+            <span id="currentPoints"></span>
+            <h4>Your Roll:</h4>
+            <span id="sideOfDie"></span>
+          </div>
+          <div class="col-md-5 player2Col">
+            <h2><span id="player2Name"></span></h2>
+            <h3>Current Score:</h3>
+            <p><span id="player2Score"></span></p>
+            <div id="button2">
+              <button type="button" id="player2Roll" class="btn btn-info">Roll!</button>
+              <button type="button" id="player2Hold" class="btn btn-primary">Hold and Switch</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="winnerPage">
+        <h2>Congratulations <span id="winner"></span>, you've won the game!</h2>
+        <button type="button" id="rematch" class="btn btn-info">Rematch</button>
+        <button type="button" id="mainMenu" class="btn btn-info">Main Menu</button>
+      </div>
+    </div>
+  </body>
+</html>
