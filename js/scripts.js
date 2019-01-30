@@ -24,6 +24,8 @@ function diceSide(sideNum, imageURL) {
     this.imageURL = imageURL
 }
 
+// Load die images
+
 var diceImages = new dice();
 
 var sides = ["images/side1.png", "images/side2.png", "images/side3.png",
@@ -33,6 +35,8 @@ for (i=1; i<= 6; i++) {
   var side = new diceSide(i, sides[i-1]);
   diceImages.addDiceSide(side);
 }
+
+// Back-End Logic
 
 var validateGuess = function (player1Guess, player2Guess) {
   if (player1Guess === player2Guess) {
@@ -65,10 +69,24 @@ var rollDice = function() {
   return Math.floor((Math.random() * 6) + 1);
 }
 
-var currentPoints = 0;
+var checkWinner = function(){
+  if (points1 >= 10){
+    var playerName = $("#player1").val();
+    $("#winner").text(playerName);
+    $("#startOfGame").hide();
+    $("#gamePlay").hide();
+    $("#winnerPage").show();
+  }
+  else if (points2 >= 10) {
+    var playerName = $("#player2").val();
+    $("#winner").text(playerName);
+    $("#startOfGame").hide();
+    $("#gamePlay").hide();
+    $("#winnerPage").show();
+  }
+}
 
 var playGame = function() {
-
   var roll = rollDice();
   var rollImage = diceImages.findImage(roll);
   $("#sideOfDie").html("<img src='" + rollImage + "'>");
@@ -117,10 +135,8 @@ var enableButtons = function() {
     document.getElementById("player1Hold").disabled = false;
   }
 }
-var points1 = 0;
-var points2 = 0;
-var calculateScore = function() {
 
+var calculateScore = function() {
   if (turn === 1){
     points2 = currentPoints + points2;
     $("#player2Score").text(points2);
@@ -131,6 +147,33 @@ var calculateScore = function() {
   }
 }
 
+var holdSwitch = function(newTurn) {
+  turn = newTurn;
+  calculateScore();
+  checkWinner();
+  disableButtons();
+  enableButtons();
+  $("#currentPoints").text("0");
+  currentPoints = 0;
+}
+
+var reMatch = function() {
+    $("#gamePlay").show();
+    $("#winnerPage").hide();
+    $("#player1Score").text("0");
+    $("#player2Score").text("0");
+    $("#currentPoints").text("0");
+    $("#sideOfDie").empty();
+    currentPoints = 0;
+    points1 = 0;
+    points2 = 0;
+}
+
+var currentPoints = 0;
+var points1 = 0;
+var points2 = 0;
+var turn = 0;
+
 function attachButtonListeners(){
   $("#button1").on("click", "#player1Roll", function(){
     playGame();
@@ -139,24 +182,19 @@ function attachButtonListeners(){
     playGame();
   });
   $("#button1").on("click", "#player1Hold", function(){
-    turn = 2;
-    calculateScore();
-    disableButtons();
-    enableButtons();
-    $("#currentPoints").text("0");
-    currentPoints = 0;
+    holdSwitch(2);
   });
   $("#button2").on("click", "#player2Hold", function(){
-    turn = 1;
-    calculateScore();
-    disableButtons();
-    enableButtons();
-    $("#currentPoints").text("0");
-    currentPoints = 0;
+    holdSwitch(1);
+  });
+  $("#button3").on("click", "#rematch", function(){
+    reMatch();
+  });
+  $("#button3").on("click", "#mainMenu", function(){
+    location.reload();
   });
 };
 
-var turn = 0;
 $(document).ready(function() {
   attachButtonListeners();
   $("form#playGame").submit(function(event) {
@@ -170,9 +208,14 @@ $(document).ready(function() {
     $("#player1Name").empty().text(inputtedPlayer1);
     $("#player2Name").empty().text(inputtedPlayer2);
 
+    $("#player1Score").text("0");
+    $("#player2Score").text("0");
+
     validateGuess(inputtedPlayer1Guess, inputtedPlayer2Guess);
 
     turn = getFirstPlayer(inputtedPlayer1Guess, inputtedPlayer2Guess);
     disableButtons();
+    $("#startOfGame").hide();
+    $("#gamePlay").show();
   });
 });

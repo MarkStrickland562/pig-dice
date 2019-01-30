@@ -12,7 +12,7 @@
       <div class="jumbotron">
         <h1>Pig Dice</h1>
       </div>
-      <div id="startOfGame">
+      <div id="startOfGame" class="row-border">
         <form id="playGame">
           <div class="form-group">
             <label for="player1">Player 1 Name:</label>
@@ -29,9 +29,8 @@
           <button type="submit" class="btn btn-info">Roll!</button>
         </form>
       </div>
-
       <div id="gamePlay">
-        <div class="row">
+        <div class="row row-border">
           <div class="col-md-5 player1Col">
             <h2><span id="player1Name"></span></h2>
             <h3>Current Score:</h3>
@@ -41,11 +40,10 @@
               <button type="button" id="player1Hold" class="btn btn-primary">Hold and Switch</button>
             </div>
           </div>
-          <div class="col-md-2 dieRoll">
-            <h4>Current Points</h4>
-            <span id="currentPoints"></span>
+          <div class="col-md-2 dieRoll col-border">
+            <h4>Current Points: <span id="currentPoints"></span></h4>
             <h4>Your Roll:</h4>
-            <span id="sideOfDie"></span>
+            <p><br><span id="sideOfDie"></span></p>
           </div>
           <div class="col-md-5 player2Col">
             <h2><span id="player2Name"></span></h2>
@@ -61,8 +59,11 @@
 
       <div id="winnerPage">
         <h2>Congratulations <span id="winner"></span>, you've won the game!</h2>
-        <button type="button" id="rematch" class="btn btn-info">Rematch</button>
-        <button type="button" id="mainMenu" class="btn btn-info">Main Menu</button>
+          <div id="button3">
+            <button type="button" id="rematch" class="btn btn-info">Rematch</button>
+            <button type="button" id="mainMenu" class="btn btn-info">Main
+              Menu</button>
+          </div>
       </div>
     </div>
   </body>
