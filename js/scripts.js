@@ -70,14 +70,14 @@ var rollDice = function() {
 }
 
 var checkWinner = function(){
-  if (points1 >= 10){
+  if (points1 >= 100){
     var playerName = $("#player1").val();
     $("#winner").text(playerName);
     $("#startOfGame").hide();
     $("#gamePlay").hide();
     $("#winnerPage").show();
   }
-  else if (points2 >= 10) {
+  else if (points2 >= 100) {
     var playerName = $("#player2").val();
     $("#winner").text(playerName);
     $("#startOfGame").hide();
